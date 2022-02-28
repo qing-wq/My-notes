@@ -2,12 +2,6 @@
 
 ## 基本概念
 
-> 账号：root
->
-> 密码：h20030825
->
-> 数据库版本：8.0.28
-
 数据库：`DateBase`，简称`DB`
 
 数据库管理系统： `DataBaseManagementSystem`，简称`DBMS`
@@ -380,12 +374,12 @@ DROP TABLE IF EXISTS `grade`
 -- 格式：insert into 表名([字段名1，字段名2，字段名3...]) value('值1','值2','值3'...)
 
 -- 插入单个字段，其他字段不赋值默认为null
-INSERT INTO `studentinfo`(`name`) VALUES('小菁')
+INSERT INTO `studentinfo`(`name`) VALUES('张三')
 -- 插入多个字段，字段和值要一一对应
-INSERT INTO `studentINFO`(`id`,`name`,`pwd`,`sex`,`birthday`) VALUES('3','小王','12345','男','2004-03-09')
+INSERT INTO `studentINFO`(`id`,`name`,`pwd`,`sex`,`birthday`) VALUES('3','小Wang','12345','男','2xxx-0x-xx')
 -- 插入多条数据，值用逗号隔开即可
-INSERT INTO `studentINFO`(`id`,`name`,`pwd`,`sex`,`birthday`) VALUES('6','小王','12345','男','2004-03-09'),
-('7','小胡','aaaaa','女','2003-08-25')
+INSERT INTO `studentINFO`(`id`,`name`,`pwd`,`sex`,`birthday`) VALUES('6','小Wang','12345','男','2xxx-0x-xx'),
+('7','小hu','aaaaa','女','2xxx-0x-xx')
 ```
 
 注意：
@@ -393,7 +387,7 @@ INSERT INTO `studentINFO`(`id`,`name`,`pwd`,`sex`,`birthday`) VALUES('6','小王
 - 由于主键自增，插入时我们可以省略
 
 - 插入多个字段时，字段和值要一一对应。如果不写表的字段，他就会==按顺序将字段和值一一匹配==。
-  即`id--3,name--小王,pwd--12345...`。
+  即`id--3,name--张三,pwd--12345...`。
 
 **修改数据`update`**
 
@@ -756,7 +750,7 @@ SELECT RAND()  -- 返回0~1之间的随机数
 SELECT SIGN(10)   -- 判断一个数的符号 0返回0 负数返回-1  返回1
 
 -- 字符串函数
-SELECT CHAR_LENGTH('我爱菁菁 菁菁爱我')  -- 返回字符串长度
+SELECT CHAR_LENGTH('我爱学习 学习爱我')  -- 返回字符串长度
 SELECT CONCAT() -- 拼接字符串
 SELECT INSERT() -- 查询是否含有某个字符
 SELECT REPLACE() -- 替换出现的字符串
@@ -847,7 +841,7 @@ CREATE TABLE `testmd5`(
     PRIMARY KEY(`id`)
 )ENGINE=INNODB DEFAULT CHARSET=utf8
 -- 明文密码
-INSERT INTO `testmd5` VALUE(1,'小王','123456'),(2,'小菁','123456')
+INSERT INTO `testmd5` VALUE(1,'zhangsan','123456'),(2,'lisi','123456')
 -- 加密
 UPDATE `testmd5` SET pwd=MD5(pwd) WHERE id=1
 -- 插入的时候加密
@@ -1101,54 +1095,32 @@ MySQL备份方式
 
   
 
-  <img src="MySQL.assets/image-20220220200757335.png" alt="image-20220220200757335" style="zoom: 50%;" />
+  <img src="MySQL.assets/image-20220228161923067.png" alt="image-20220228161923067" style="zoom:67%;" />
 
 - 使用命令行**导出**
 
+  关键字：`mysqldump`
+  
   ```shell
   # 格式：mysqldump -h主机  -u用户名  -p密码   数据库  表名  >物理磁盘位置/文件名
   # 导出表
-  >mysqldump -hlocalhost -uroot -ph20030825 school student >C:\Users\hujingjing\Desktop/a.sql
+  >mysqldump -hlocalhost -uroot -p123456 school student >C:\Users\hujingjing\Desktop/a.sql
   # 导出多张表
-  >mysqldump -hlocalhost -uroot -ph20030825 school student result subject >C:\Users\hujingjing\Desktop/b.sql
+  >mysqldump -hlocalhost -uroot -p123456 school student result subject >C:\Users\hujingjing\Desktop/b.sql
   # 导出数据库
-  >mysqldump -hlocalhost -uroot -ph20030825 bank >C:\Users\hujingjing\Desktop/c.sql
+  >mysqldump -hlocalhost -uroot -p123456 bank >C:\Users\hujingjing\Desktop/c.sql
   ```
 
   $Tips:$ `-h`参数默认是主机名称。如果主机是`localhost`可以默认不写。
 
   使用命令行**导入**
-
+  
   ```mysql
   # 登录状态，切换到指定数据库后 格式：source 备份文件路径
   mysql>source C:/Users/hujingjing/desktop/b.sql
   # 未登录状态  格式：mysql -u用户名 -p密码 库名 <备份文件
-  >mysql -uroot -ph20030825 bank<C:/Users/hujingjing/desktop/b.sql
+  >mysql -uroot -p123456 bank<C:/Users/hujingjing/desktop/b.sql
   ```
-
+  
   <img src="MySQL.assets/image-20220220204406200.png" alt="image-20220220204406200" style="zoom:67%;" />
 
-## MySQL项目设计规范
-
-当数据库教教复杂时，我们就需要规范设计。
-
-良好的数据库设计：
-
-- 节约内存空间，减少数据冗余
-- 保证数据的完整性
-- 方便我们开发系统
-
-在软件按开发中，关于数据库的设计：
-
-- 分析需求：分子业务和需要处理的数据库的需求
-- 概要设计：设计关系图 — E-R 图
-
-设计数据库的步骤（以个人博客为例）：
-
-- 收集信息
-  - 用户表（用户登录注册，用户的个人信息，写的博客，创建的分类）
-  - 分类表（文章分类，谁创建的）
-  - 文章表（文章信息）
-  - 评论表
-  - 友链表
-  - 自定义表
