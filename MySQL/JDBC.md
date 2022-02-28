@@ -50,7 +50,7 @@ public class FirstJdbc {
         //2.用户信息和url
         String url = "jdbc:mysql://localhost:3306/jdbcstudy?useUnicode=true&characterEncoding=utf8&&useSSL=true&serverTimezone=GMT%2B8";
         String username = "root";
-        String password = "h20030825";
+        String password = "123456";
         //3.连接成功，创建数据库对象  Connection代表数据库
         Connection connection = DriverManager.getConnection(url, username, password);
         //4.获取执行SQL的对象：Statement
@@ -168,7 +168,7 @@ resultSet.absolute(row);  // 移动到指定行
 driver=com.mysql.cj.jdbc.Driver
 url = jdbc:mysql://localhost:3306/jdbcstudy?useUnicode=true&characterEncoding=utf8&useSSL=true
 username=root
-password=h20030825
+password=123456
 ```
 
 `jdbcUtils.java`
@@ -278,7 +278,7 @@ import java.sql.Statement;
 
 public class SQL注入 {
     public static void main(String[] args) throws SQLException {
-//  正常输入：      login("小王","123456");
+//  正常输入：      login("zhangsan","123456");
         login("' or '1=1","123456' or '1=1");   // 恶意数据
     }
     public static void login(String username,String password) throws SQLException {
@@ -338,7 +338,7 @@ public class TestPrepareStatement {
 
             preparedStatement = connection.prepareStatement(sql);  // 预编译SQL，即先写sql，但不执行
             // 手动传参
-            preparedStatement.setString(1,"小胡");
+            preparedStatement.setString(1,"lisi");
             preparedStatement.setString(2,"aaaaaaa");
             preparedStatement.setString(3,"jing@qq.com");
             // new java.util.Date().getTime()  获取时间戳
@@ -550,7 +550,7 @@ public class TestTruncation {
 driverClassName=com.mysql.jdbc.Driver
 url=jdbc:mysql://localhost:3306/jdbcstudy?useUnicode=true&characterEncoding=utf8&useSSL=true
 username=root
-password=h20030825
+password=123456
 
 #<!-- 初始化连接 -->
 initialSize=10
@@ -709,7 +709,7 @@ c3p0的缺省（默认）配置
         <property name="driverClass">com.mysql.cj.jdbc.Driver</property>
         <property name="jdbcUrl">jdbc:mysql://localhost:3306/jdbcstudy?useUnicode=true&amp;characterEncoding=utf8&amp;uesSSL=true&amp;serverTimezone=UTC</property>
         <property name="user">root</property>
-        <property name="password">h20030825</property>
+        <property name="password">123456</property>
 
         <property name="acquireIncrement">5</property>
         <property name="initialPoolSize">10</property>
@@ -723,7 +723,7 @@ c3p0的命名配置
         <property name="driverClass">com.mysql.cj.jdbc.Driver</property>
         <property name="jdbcUrl">jdbc:mysql://localhost:3306/jdbcstudy?useUnicode=true&amp;characterEncoding=utf8&amp;uesSSL=true&amp;serverTimezone=UTC</property>
         <property name="user">root</property>
-        <property name="password">h20030825</property>
+        <property name="password">123456</property>
 
         <property name="acquireIncrement">5</property>
         <property name="initialPoolSize">10</property>
