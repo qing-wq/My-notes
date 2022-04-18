@@ -1013,7 +1013,7 @@ SET autocommit = 1
 - 在创建表的时候添加索引
 - 创建表之后添加索引
 
-
+<img src="MySQL.assets/image-20220301231617162.png" alt="image-20220301231617162" style="zoom:67%;" />
 
 ### 索引原则
 

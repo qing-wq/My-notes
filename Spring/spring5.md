@@ -553,7 +553,7 @@ xmlns:c="http://www.springframework.org/schema/c"
 
 可以直接使用在`属性`上，也可以直接使用在`set方法`上，甚至可以写在构造方法上。
 
-使用`@Autowired`可以不用再编写`set`方法，前提是自动装配的属性在IoC容器中存在，且符合`byName`。
+使用`@Autowired`可以不用再编写`set`方法，前提是自动装配的属性在IoC容器中存在，且符合`byType/byName`。
 
 `@Autowired`会先根据`byType`去查询符合的Bean，如果查询结果不止一个，那么`@Autowired`就会根据名称来查找
 
